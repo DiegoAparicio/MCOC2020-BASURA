@@ -118,3 +118,8 @@ ver_reticulado_3d(ret_D,
 
 plt.title("FU caso 2: 1.2 D + 1.6 L")
 plt.show()
+
+
+peso = ret_D.calcular_peso_total()
+
+print(f"peso = {peso}")

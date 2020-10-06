@@ -91,16 +91,25 @@ class Barra(object):
         """Para la fuerza Fu (proveniente de una combinacion de cargas)
         revisar si esta barra cumple las disposiciones de diseño.
         """
-        return False
+        A=self.calcular_area()
+        Fn=A*self.σy
+        
+        if ϕ*Fn < abs(Fu):
+            return False
+        else:
+            return True
+        
 
 
     def obtener_factor_utilizacion(self, Fu, ϕ=0.9):
         """Para la fuerza Fu (proveniente de una combinacion de cargas)
         calcular y devolver el factor de utilización
         """
-        FU = 0. 
-
-        return FU
+        A=self.calcular_area()
+        Fn=A*self.σy
+        
+        factor_de_utilizacion = abs(Fu) / (ϕ*Fn)
+        return factor_de_utilizacion
 
 
     def rediseñar(self, Fu, ret, ϕ=0.9):
@@ -109,6 +118,13 @@ class Barra(object):
         se cumplan las disposiciones de diseño lo más cerca posible
         a FU = 1.0.
         """
+        # A=self.calcular_area()
+        # Fn=A*self.σy
+        # if abs(Fu) < 0.95 or abs(Fu) > 1:
+        #     Fu()    
+            
+        # # cambiando solo el espesor
+        # self.t=np.Solve()
         self.R = 0.9*self.R   #cambiar y poner logica de diseño
         self.t = 0.9*self.t   #cambiar y poner logica de diseño
         return None

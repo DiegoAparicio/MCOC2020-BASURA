@@ -24,7 +24,10 @@ GPa = 1000*MPa
 L = 5.0  *m
 F = 100*KN
 B = 2.0 *m
-
+Q=400*(kg/(m**2))
+g=9.8*(m/(s**2))
+A0=7.5*(m**2)
+A1=15*(m**2)
 
 #Inicializar modelo
 ret = Reticulado()
@@ -47,16 +50,16 @@ ret.agregar_nodo(45, 2, 0)      #10
 """
 PREGUNTAR, PARECIERA SER QUE ES UNA BARRA CUADRADA
 """
-# A = (1.1*cm)**2
-# r = sqrt(A/3.141593)
-r = 8*cm
+A = (8*cm)**2
+r = sqrt(A/3.141593)
+# r = 8*cm
 t = 5*mm 
 """
 REVISAR EN PROPS R,R DEBERIA SER R,T
 """
 props = [r, r, 200*GPa, 7600*kg/m**3, 420*MPa]
 
-props2 = [r, r, 200*GPa, 7600*kg/m**3, 420*MPa]
+props2 = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
 
 # props2 = [0.6*r, 0.6*r, 200*GPa, 7600*kg/m**3, 420*MPa]
 
@@ -95,19 +98,41 @@ ret.agregar_barra(Barra(5, 6, *props))      # 30
 # ver_reticulado_3d(ret)
 
 
-
+# nodo,gdl,valor
+# nodo 1
 ret.agregar_restriccion(0, 0, 0)
 ret.agregar_restriccion(0, 1, 0)
 ret.agregar_restriccion(0, 2, 0)
-
-ret.agregar_restriccion(2, 2, 0)
-ret.agregar_restriccion(5, 2, 0)
+# nodo 7 
+ret.agregar_restriccion(7, 0, 0)
+ret.agregar_restriccion(7, 1, 0)
 ret.agregar_restriccion(7, 2, 0)
+# nodo 3
+ret.agregar_restriccion(3, 1, 0)
+ret.agregar_restriccion(3, 2, 0)
 
-ret.agregar_restriccion(5, 0, 0)
+# nodo 10
+ret.agregar_restriccion(10, 1, 0)
+ret.agregar_restriccion(10, 2, 0)
+
+# ret.agregar_restriccion(2, 2, 0)
+# ret.agregar_restriccion(5, 2, 0)
+# ret.agregar_restriccion(7, 2, 0)
+
+# ret.agregar_restriccion(5, 0, 0)
 
 
-ret.agregar_fuerza(4, 2, -F)
+
+# Carga viva en nodos 
+ret.agregar_fuerza(0, 2, -Q*A0*g)
+ret.agregar_fuerza(7, 2, -Q*A0*g)
+ret.agregar_fuerza(3, 2, -Q*A0*g)
+ret.agregar_fuerza(10, 2, -Q*A0*g)
+
+ret.agregar_fuerza(1, 2, -Q*A1*g)
+ret.agregar_fuerza(2, 2, -Q*A1*g)
+ret.agregar_fuerza(8, 2, -Q*A1*g)
+ret.agregar_fuerza(9, 2, -Q*A1*g)
 
 
 peso = ret.calcular_peso_total()
@@ -136,10 +161,10 @@ ver_reticulado_3d(ret,
         "ver_fuerza_en_barras": True
     })
 
-# barras_a_rediseñar = [3,4,5, 9, 10, 11]
-# barras = ret.obtener_barras()
-# for i in barras_a_rediseñar:
-# 	barras[i].rediseñar(f[i])
+barras_a_rediseñar = [3,4,5, 9, 10, 11]
+barras = ret.obtener_barras()
+for i in barras_a_rediseñar:
+ 	barras[i].rediseñar(f[i])
 
 
 
@@ -158,7 +183,7 @@ ver_reticulado_3d(ret,
         "factor_amplificacion_deformada": 30.,
     },
     opciones_barras = {
-        "color_barras_por_fu": True,
-        "ver_numeros_de_barras": True,
-        "ver_fuerza_en_barras": True
+        "color_barras_por_dato": True,
+        "ver_numeros_de_barras": False,
+        "ver_dato_en_barras": True
     })
