@@ -60,26 +60,36 @@ props2 = [r, r, 200*GPa, 7600*kg/m**3, 420*MPa]
 
 # props2 = [0.6*r, 0.6*r, 200*GPa, 7600*kg/m**3, 420*MPa]
 
-ret.agregar_barra(Barra(0, 1, *props))   # 0
-ret.agregar_barra(Barra(1, 2, *props))   # 1
-ret.agregar_barra(Barra(3, 4, *props))   # 2
-ret.agregar_barra(Barra(0, 3, *props2))   # 3
-ret.agregar_barra(Barra(3, 1, *props2))   # 4
-ret.agregar_barra(Barra(1, 4, *props2))   # 5
-ret.agregar_barra(Barra(4, 2, *props))   # 6
-ret.agregar_barra(Barra(5, 6, *props))   # 7
-ret.agregar_barra(Barra(6, 7, *props))   # 8
-ret.agregar_barra(Barra(5, 3, *props2))   # 9
-ret.agregar_barra(Barra(3, 6, *props2))   # 10
-ret.agregar_barra(Barra(6, 4, *props2))   # 11
-ret.agregar_barra(Barra(4, 7, *props))   # 12
-ret.agregar_barra(Barra(0, 5, *props))   # 13
-ret.agregar_barra(Barra(1, 6, *props))   # 14
-ret.agregar_barra(Barra(2, 7, *props))   # 15
-ret.agregar_barra(Barra(0, 6, *props))   # 16
-ret.agregar_barra(Barra(6, 2, *props))   # 17
-ret.agregar_barra(Barra(5, 1, *props))   # 18
-ret.agregar_barra(Barra(1, 7, *props))   # 19
+ret.agregar_barra(Barra(0, 1, *props))      # 1
+ret.agregar_barra(Barra(1, 2, *props))      # 2
+ret.agregar_barra(Barra(2, 3, *props))      # 3
+ret.agregar_barra(Barra(3, 10, *props))     # 4
+ret.agregar_barra(Barra(9, 10, *props))     # 5
+ret.agregar_barra(Barra(8, 9, *props))      # 6
+ret.agregar_barra(Barra(7, 8, *props))      # 7
+ret.agregar_barra(Barra(0, 7, *props))      # 8
+ret.agregar_barra(Barra(1, 7, *props))      # 9
+ret.agregar_barra(Barra(0, 8, *props))      # 10
+ret.agregar_barra(Barra(1, 8, *props))      # 11
+ret.agregar_barra(Barra(2, 8, *props))      # 12
+ret.agregar_barra(Barra(1, 9, *props))      # 13
+ret.agregar_barra(Barra(2, 9, *props))      # 14
+ret.agregar_barra(Barra(3, 9, *props))      # 15
+ret.agregar_barra(Barra(2, 10, *props))     # 16
+ret.agregar_barra(Barra(4, 7, *props))      # 17
+ret.agregar_barra(Barra(0, 4, *props))      # 18
+ret.agregar_barra(Barra(4, 8, *props))      # 19
+ret.agregar_barra(Barra(1, 4, *props))      # 20
+ret.agregar_barra(Barra(5, 8, *props))      # 21
+ret.agregar_barra(Barra(1, 5, *props))      # 22
+ret.agregar_barra(Barra(5, 9, *props))      # 23
+ret.agregar_barra(Barra(2, 5, *props))      # 24
+ret.agregar_barra(Barra(6, 9, *props))      # 25
+ret.agregar_barra(Barra(2, 6, *props))      # 26
+ret.agregar_barra(Barra(6, 10, *props))     # 27
+ret.agregar_barra(Barra(3, 6, *props))      # 28
+ret.agregar_barra(Barra(4, 5, *props))      # 29
+ret.agregar_barra(Barra(5, 6, *props))      # 30
 
 
 # ver_reticulado_3d(ret)
