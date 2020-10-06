@@ -150,8 +150,8 @@ def ver_reticulado_3d(ret, fig=1,
     ver_grilla=True,
     axis_Equal=True,
     nueva_figura=True,
-    tamaño_nueva_figura = [8, 6],
-    zoom = 100,
+    tamaño_nueva_figura = [22, 18],
+    zoom = 500,
     deshabilitar_ejes=False
     ):
 
@@ -191,9 +191,16 @@ def ver_reticulado_3d(ret, fig=1,
         # norm, hence I call half the max range the plot radius.
         plot_radius = 50./zoom*max([x_range, y_range, z_range])
 
-        ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
-        ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
-        ax.set_zlim3d([z_middle - plot_radius, z_middle + plot_radius])
+        # ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
+        # ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
+        # ax.set_zlim3d([z_middle - plot_radius, z_middle + plot_radius])
+        """
+        LO ANTERIOR ES EL CODIGO ORIGINAL, ADECUANDOLO PARA TENER MEJOR VISUALIZACION 
+        DEL GRAFICO CON EL CODIGO DE ABAJO
+        """
+        ax.set_xlim3d([-5, 50])
+        ax.set_ylim3d([-2, 4])
+        ax.set_zlim3d([-3, 4])
 
     if deshabilitar_ejes:
         ax = plt.gca()
