@@ -30,17 +30,17 @@ B = 2.0 *m
 ret = Reticulado()
 
 #Nodos
-ret.agregar_nodo(0     , 0   ,  0         )
-ret.agregar_nodo(L     , 0   ,  0         )
-ret.agregar_nodo(2*L   , 0   ,  0         )
-ret.agregar_nodo(L/2   , B/2 , sqrt(3)/2*L)
-ret.agregar_nodo(3*L/2 , B/2 , sqrt(3)/2*L)
-ret.agregar_nodo(0     , B   , 0          )
-ret.agregar_nodo(L     , B   , 0          )
-ret.agregar_nodo(2*L   , B   , 0          )
-
-
-
+ret.agregar_nodo(0, 0, 0)       #0
+ret.agregar_nodo(15, 0, 0)      #1
+ret.agregar_nodo(30, 0, 0)      #2
+ret.agregar_nodo(45 ,0 ,0)      #3
+ret.agregar_nodo(7.5, 1, 3.5)   #4
+ret.agregar_nodo(22.5, 1, 3.5)  #5
+ret.agregar_nodo(37.5, 1, 3.5)  #6
+ret.agregar_nodo(0, 2, 0)       #7
+ret.agregar_nodo(15, 2, 0)      #8
+ret.agregar_nodo(30, 2, 0)      #9
+ret.agregar_nodo(45, 2, 0)      #10
 
 
 #Barras
