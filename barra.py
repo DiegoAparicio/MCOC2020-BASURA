@@ -1,7 +1,8 @@
 import numpy as np
 
 g = 9.81 #kg*m/s^2
-
+m=1.0
+mm=m/1000
 
 class Barra(object):
 
@@ -118,6 +119,76 @@ class Barra(object):
         se cumplan las disposiciones de diseño lo más cerca posible
         a FU = 1.0.
         """
+        # hay 2 posibles casos:
+        # 1) se |Fu| >= 1.0
+        # 2) que el |Fu| << 1:
+        # if Fu>0:
+            
+            # se obtiene esbeltez
+        Largo=self.calcular_largo(ret)
+        I=(np.pi/4)*(self.R**4 - (self.R - self.t)**4)
+
+        Area=self.calcular_area()
+        
+        radio_giro= np.sqrt(I/Area)
+        
+        lamba = np.sqrt(Largo/radio_giro)
+        # ecuaciones:
+        # lambda <=300:
+        # factor_fu<=1
+        
+        # abs(fuerza)/(ϕ*(np.pi*(self.R**2) - np.pi*((self.R-self.t)**2))*self.σy)
+        
+        
+        """
+        # Caso 1
+        if Fu==0.:
+            return None
+        c=1
+        while True:
+            # print(f"R : {self.R}")
+            
+            factor_fu=self.obtener_factor_utilizacion(Fu,ϕ=0.9)
+            # print(f" Fu : {Fu}")
+            # print(f"factor_fu : {factor_fu}")
+            # print(f"area : {self.calcular_area()}")
+            if 0.8 < factor_fu < 1.0:
+                return None
+            
+            if factor_fu >= 1.0 and self.t>0:
+                self.t+=1*mm
+                print("A")
+            elif factor_fu < 0.8 and self.t>0:
+                self.t-=1*mm
+                # print("B")
+                if self.t==1*mm:
+                    # print("C")
+                    return None
+                    while factor_fu < 0.8:
+                        # print("D")
+                        if self.R>10*mm:
+                            self.R-=5*mm
+                            # print("E")
+                        else:
+                            # print("F")
+                            return None
+          
+            # if Fu==0:
+            #     return None
+
+            else:
+                
+                print(c)
+                c+=1
+                return None
+        
+            # R y t ==> A
+            
+        
+        
+        
+        
+        
         # A=self.calcular_area()
         # Fn=A*self.σy
         # if abs(Fu) < 0.95 or abs(Fu) > 1:
@@ -125,8 +196,21 @@ class Barra(object):
             
         # # cambiando solo el espesor
         # self.t=np.Solve()
-        self.R = 0.9*self.R   #cambiar y poner logica de diseño
-        self.t = 0.9*self.t   #cambiar y poner logica de diseño
+        """  
+        factor_fu=self.obtener_factor_utilizacion(Fu,ϕ=0.9)
+        x=0.90
+        radio_real=self.R
+        t_real=self.t
+        while factor_fu < 0.96:
+            # print(factor_fu)
+            
+            self.R = x*radio_real   #cambiar y poner logica de diseño
+            self.t = x*t_real   #cambiar y poner logica de diseño
+            factor_fu=self.obtener_factor_utilizacion(Fu,ϕ=0.9)
+            x-=0.02
+        
+            # self.r*0.98=self.r*0.98*0.96
         return None
+        
 
 

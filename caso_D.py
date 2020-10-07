@@ -42,16 +42,16 @@ def caso_D():
     
     #Nodos
     ret.agregar_nodo(0, 0, 0)       #0
-    ret.agregar_nodo(15, 0, 0)      #1
-    ret.agregar_nodo(30, 0, 0)      #2
-    ret.agregar_nodo(45 ,0 ,0)      #3
-    ret.agregar_nodo(7.5, 1, 3.5)   #4
-    ret.agregar_nodo(22.5, 1, 3.5)  #5
-    ret.agregar_nodo(37.5, 1, 3.5)  #6
+    ret.agregar_nodo(5, 0, 0)      #1
+    ret.agregar_nodo(10, 0, 0)      #2
+    ret.agregar_nodo(15 ,0 ,0)      #3
+    ret.agregar_nodo(2.5, 1, 3.5)   #4
+    ret.agregar_nodo(7.5, 1, 3.5)  #5
+    ret.agregar_nodo(12.5, 1, 3.5)  #6
     ret.agregar_nodo(0, 2, 0)       #7
-    ret.agregar_nodo(15, 2, 0)      #8
-    ret.agregar_nodo(30, 2, 0)      #9
-    ret.agregar_nodo(45, 2, 0)      #10
+    ret.agregar_nodo(5, 2, 0)      #8
+    ret.agregar_nodo(10, 2, 0)      #9
+    ret.agregar_nodo(15, 2, 0)      #10
     
     
     #Barras

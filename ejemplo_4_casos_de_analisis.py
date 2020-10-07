@@ -123,3 +123,43 @@ plt.show()
 peso = ret_D.calcular_peso_total()
 
 print(f"peso = {peso}")
+f = ret_D.recuperar_fuerzas()
+
+
+barras_a_rediseñar = [i for i in range(30)]
+barras_a_rediseñar = [1,8,9,14,15]
+
+barras = ret_D.obtener_barras()
+for i in barras_a_rediseñar:
+    barras[i].rediseñar(f[i],ret_D)
+FU_caso2 = ret_D.recuperar_factores_de_utilizacion(f_2)
+
+
+
+ver_reticulado_3d(ret_D, 
+    opciones_nodos = {
+        "usar_posicion_deformada": True,
+        "factor_amplificacion_deformada": 60.,
+    },
+    opciones_barras = {
+        "color_barras_por_dato": True,
+        "ver_numeros_de_barras": False,
+        "ver_dato_en_barras": True,
+        "dato": FU_caso2,
+        "color_fondo": [1,1,1,0.4]
+    }, 
+    llamar_show=False,
+    zoom=180.,
+    deshabilitar_ejes=True)
+
+plt.title("FU caso 2: 1.2 D + 1.6 L")
+plt.show()
+
+
+peso = ret_D.calcular_peso_total()
+
+print(f"peso = {peso}")
+
+
+
+

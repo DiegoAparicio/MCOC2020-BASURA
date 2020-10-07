@@ -52,12 +52,12 @@ PREGUNTAR, PARECIERA SER QUE ES UNA BARRA CUADRADA
 """
 A = (8*cm)**2
 r = sqrt(A/3.141593)
-# r = 8*cm
+r = 8*cm
 t = 5*mm 
 """
 REVISAR EN PROPS R,R DEBERIA SER R,T
 """
-props = [r, r, 200*GPa, 7600*kg/m**3, 420*MPa]
+props = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
 
 props2 = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
 
@@ -161,10 +161,10 @@ ver_reticulado_3d(ret,
         "ver_fuerza_en_barras": True
     })
 
-barras_a_rediseñar = [3,4,5, 9, 10, 11]
+barras_a_rediseñar = [4,5, 9, 10, 11]
 barras = ret.obtener_barras()
 for i in barras_a_rediseñar:
- 	barras[i].rediseñar(f[i])
+    barras[i].rediseñar(f[i],ret)
 
 
 
