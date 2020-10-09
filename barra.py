@@ -1,5 +1,9 @@
 import numpy as np
 
+from sympy import *
+from sympy.solvers.solveset import linsolve
+import itertools
+from operator import itemgetter
 g = 9.81 #kg*m/s^2
 m=1.0
 mm=m/1000
@@ -119,98 +123,45 @@ class Barra(object):
         se cumplan las disposiciones de diseño lo más cerca posible
         a FU = 1.0.
         """
-        # hay 2 posibles casos:
-        # 1) se |Fu| >= 1.0
-        # 2) que el |Fu| << 1:
-        # if Fu>0:
-            
-            # se obtiene esbeltez
-        Largo=self.calcular_largo(ret)
-        I=(np.pi/4)*(self.R**4 - (self.R - self.t)**4)
-
-        Area=self.calcular_area()
-        
-        radio_giro= np.sqrt(I/Area)
-        
-        lamba = np.sqrt(Largo/radio_giro)
-        # ecuaciones:
-        # lambda <=300:
-        # factor_fu<=1
-        
-        # abs(fuerza)/(ϕ*(np.pi*(self.R**2) - np.pi*((self.R-self.t)**2))*self.σy)
         
         
-        """
-        # Caso 1
-        if Fu==0.:
-            return None
-        c=1
-        while True:
-            # print(f"R : {self.R}")
-            
-            factor_fu=self.obtener_factor_utilizacion(Fu,ϕ=0.9)
-            # print(f" Fu : {Fu}")
-            # print(f"factor_fu : {factor_fu}")
-            # print(f"area : {self.calcular_area()}")
-            if 0.8 < factor_fu < 1.0:
-                return None
-            
-            if factor_fu >= 1.0 and self.t>0:
-                self.t+=1*mm
-                print("A")
-            elif factor_fu < 0.8 and self.t>0:
-                self.t-=1*mm
-                # print("B")
-                if self.t==1*mm:
-                    # print("C")
-                    return None
-                    while factor_fu < 0.8:
-                        # print("D")
-                        if self.R>10*mm:
-                            self.R-=5*mm
-                            # print("E")
-                        else:
-                            # print("F")
-                            return None
-          
-            # if Fu==0:
-            #     return None
-
-            else:
+        lista_R=np.arange(0.01,0.08,0.005)
+        lista_t=np.arange(0.001,0.006,0.001)
+        todas_las_combinaciones = list(itertools.product(lista_R, lista_t))
+        
+        lista_pasa_esbeltez=[]
+        for i in todas_las_combinaciones: # Este for evalua la condicion de esbeltez
+            Area_combinacion_i=np.pi*(i[0]**2) - np.pi*((i[0]-i[1])**2)
+            I_combinacion_i=(np.pi/4)*(i[0]**4 - (i[0] - i[1])**4)
+            Largo_combinacion_i=self.calcular_largo(ret)
+            eq1=np.sqrt(Largo_combinacion_i/(np.sqrt((I_combinacion_i)/(Area_combinacion_i))))
+            # print(f'eq1 = {eq1}')
+            if eq1 <= 300.0:
+                lista_pasa_esbeltez.append(i)
+        
+        
+        lista_pasa_esbeltez_y_fu=[]
+        for j in lista_pasa_esbeltez: # Este for itera sobre la lista "lista_pasa_esbeltez", para el calculo del factor de 
+            Area_combinacion_j=np.pi*(j[0]**2) - np.pi*((j[0]-j[1])**2)
+            I_combinacion_j=(np.pi/4)*(j[0]**4 - (j[0] - j[1])**4)
+            Largo_combinacion_j=self.calcular_largo(ret)
+            if Fu < 0.0:
+                caso_a=Area_combinacion_j*self.σy
+                caso_b=(((np.pi)**2)*self.E*I_combinacion_j)/(Largo_combinacion_j**2)
+                Fn=min(caso_a,caso_b)
+            if Fu >= 0:
+                Fn=Area_combinacion_j*self.σy
+            eq2 = abs(Fu)/(ϕ*Fn)
+            if eq2 < 1.0:
+                lista_aux=[j[0],j[1],eq2]
+                lista_pasa_esbeltez_y_fu.append(lista_aux)
                 
-                print(c)
-                c+=1
-                return None
         
-            # R y t ==> A
-            
-        
-        
-        
-        
-        
-        # A=self.calcular_area()
-        # Fn=A*self.σy
-        # if abs(Fu) < 0.95 or abs(Fu) > 1:
-        #     Fu()    
-            
-        # # cambiando solo el espesor
-        # self.t=np.Solve()
-        """  
-        factor_fu=self.obtener_factor_utilizacion(Fu,ϕ=0.9)
-        x=0.90
-        radio_real=self.R
-        t_real=self.t
-        while factor_fu < 0.96:
-            # print(factor_fu)
-            
-            self.R = x*radio_real   #cambiar y poner logica de diseño
-            self.t = x*t_real   #cambiar y poner logica de diseño
-            factor_fu=self.obtener_factor_utilizacion(Fu,ϕ=0.9)
-            x-=0.02
-        
-            # self.r*0.98=self.r*0.98*0.96
-        return None
+        maximos_R_t=sorted(lista_pasa_esbeltez_y_fu, key=itemgetter(2))[-1]
+        self.R=maximos_R_t[0]
+        self.t=maximos_R_t[1]
+       
+        return None       
         
 
-
+        

@@ -60,8 +60,8 @@ def caso_D():
     """
     # A = (8*cm)**2
     # r = sqrt(A/3.141593)
-    r = 8*cm
-    t = 5*mm 
+    r = 8.0*cm
+    t = 5.0*mm 
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """

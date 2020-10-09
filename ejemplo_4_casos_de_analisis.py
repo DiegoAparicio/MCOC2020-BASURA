@@ -124,14 +124,15 @@ peso = ret_D.calcular_peso_total()
 
 print(f"peso = {peso}")
 f = ret_D.recuperar_fuerzas()
+# print(f_2)
 
 
 barras_a_rediseñar = [i for i in range(30)]
-barras_a_rediseñar = [1,8,9,14,15]
+# barras_a_rediseñar = [1,8,9,14,15]
 
 barras = ret_D.obtener_barras()
 for i in barras_a_rediseñar:
-    barras[i].rediseñar(f[i],ret_D)
+    barras[i].rediseñar(f_2[i],ret_D)
 FU_caso2 = ret_D.recuperar_factores_de_utilizacion(f_2)
 
 
