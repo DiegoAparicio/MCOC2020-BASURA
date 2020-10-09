@@ -65,7 +65,6 @@ class Barra(object):
 
     def obtener_vector_de_cargas(self, ret):
         W = self.calcular_peso(ret)
-
         return np.array([0,0, -W, 0,0, -W])
 
 
@@ -92,7 +91,7 @@ class Barra(object):
 
 
 
-    def chequear_diseño(self, Fu, ϕ=0.9):
+    def chequear_diseño(self, Fu,ret, ϕ=0.9):
         """Para la fuerza Fu (proveniente de una combinacion de cargas)
         revisar si esta barra cumple las disposiciones de diseño.
         """
@@ -157,6 +156,7 @@ class Barra(object):
                 
         
         maximos_R_t=sorted(lista_pasa_esbeltez_y_fu, key=itemgetter(2))[-1] #se obtiene el radio y espesor respectivo para el maximo factor de utilizacion
+        #print (maximos_R_t)
         self.R=maximos_R_t[0]
         self.t=maximos_R_t[1]
        

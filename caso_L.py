@@ -125,8 +125,7 @@ def caso_L():
     ret.agregar_fuerza(2, 2, -Q*A1*g)
     ret.agregar_fuerza(8, 2, -Q*A1*g)
     ret.agregar_fuerza(9, 2, -Q*A1*g)
-    print(f'-Q*A0*g{-Q*A0*g}')
-    print(f'-Q*A1*g{-Q*A1*g}')
+
     return ret
 
 
