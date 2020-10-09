@@ -135,7 +135,6 @@ class Barra(object):
             I_combinacion_i=(np.pi/4)*(i[0]**4 - (i[0] - i[1])**4)
             Largo_combinacion_i=self.calcular_largo(ret)
             eq1=np.sqrt(Largo_combinacion_i/(np.sqrt((I_combinacion_i)/(Area_combinacion_i))))
-            # print(f'eq1 = {eq1}')
             if eq1 <= 300.0:
                 lista_pasa_esbeltez.append(i)
         
@@ -145,19 +144,19 @@ class Barra(object):
             Area_combinacion_j=np.pi*(j[0]**2) - np.pi*((j[0]-j[1])**2)
             I_combinacion_j=(np.pi/4)*(j[0]**4 - (j[0] - j[1])**4)
             Largo_combinacion_j=self.calcular_largo(ret)
-            if Fu < 0.0:
+            if Fu < 0.0: # En este caso se evaluan las barras a compresion para verificar con la condicion de carga critica de pandeo
                 caso_a=Area_combinacion_j*self.σy
                 caso_b=(((np.pi)**2)*self.E*I_combinacion_j)/(Largo_combinacion_j**2)
                 Fn=min(caso_a,caso_b)
-            if Fu >= 0:
+            if Fu >= 0: # Finalmente se evaluan las barras, con tensiones de traccion y se procede con el calculo del factor de utilizacion.
                 Fn=Area_combinacion_j*self.σy
             eq2 = abs(Fu)/(ϕ*Fn)
-            if eq2 < 1.0:
+            if eq2 < 1.0: # se verifica que el Factor de utilizacion sea menor a 1, ya que no puede ser mayor.
                 lista_aux=[j[0],j[1],eq2]
                 lista_pasa_esbeltez_y_fu.append(lista_aux)
                 
         
-        maximos_R_t=sorted(lista_pasa_esbeltez_y_fu, key=itemgetter(2))[-1]
+        maximos_R_t=sorted(lista_pasa_esbeltez_y_fu, key=itemgetter(2))[-1] #se obtiene el radio y espesor respectivo para el maximo factor de utilizacion
         self.R=maximos_R_t[0]
         self.t=maximos_R_t[1]
        
