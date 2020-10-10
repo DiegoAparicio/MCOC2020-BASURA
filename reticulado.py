@@ -15,6 +15,7 @@ class Reticulado(object):
         self.restricciones = {}
         self.Ndimensiones = 3
         self.has_solution = False
+        self.desplazamientos_verticales=[]
 
     def agregar_nodo(self, x, y, z=0):
         if self.Nnodos+1 > Reticulado.__NNodosInit__:
@@ -162,7 +163,9 @@ class Reticulado(object):
             dofs = [2*n, 2*n+1]
         elif self.Ndimensiones == 3:
             dofs = [3*n, 3*n+1, 3*n+2]
-        
+        # print(f'el nodo {n} se desplaza verticalmente en, {self.u[dofs][2]}')
+        self.desplazamientos_verticales.append([n,self.u[dofs][2]])
+        # print(f'dofs, {dofs}')
         return self.u[dofs]
 
 

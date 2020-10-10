@@ -1,7 +1,9 @@
 from caso_D import caso_D
 from caso_L import caso_L
 from graficar3d import ver_reticulado_3d
-
+import itertools
+from operator import itemgetter
+from numpy import *
 ret_D = caso_D()
 ret_L = caso_L()
 #Casos optimizados
@@ -71,7 +73,12 @@ ver_reticulado_3d(ret_D,
     zoom=180.,
     deshabilitar_ejes=True)
 
-plt.title("Tensiones en caso 1: 1.4 D ")
+plt.suptitle("Tensiones en caso 1: 1.4 D ")
+# ret_D_desplazamientos_max=sorted(ret_D.desplazamientos_verticales, key=itemgetter(1))[0]
+# plt.title(f'Desplazamiento maximo en el nodo {ret_D_desplazamientos_max[0]}: {round(ret_D_desplazamientos_max[1]*1000,3)}[mm] ')
+# print(array(ret_D.desplazamientos_verticales)[:,0])
+# ret_D.desplazamientos_verticales=[]
+# plt.legend()
 plt.show()
 
 
@@ -93,6 +100,10 @@ ver_reticulado_3d(ret_D,
     deshabilitar_ejes=True)
 
 plt.title("Tensiones en caso 1: 1.2 D + 1.6 L")
+# ret_D_desplazamientos_max=sorted(ret_D.desplazamientos_verticales, key=itemgetter(1))[0]
+# plt.title(f'Desplazamiento maximo en el nodo {ret_D_desplazamientos_max[0]}: {round(ret_D_desplazamientos_max[1]*1000,3)}[mm] ')
+# ret_D.desplazamientos_verticales=[]
+
 plt.show()
 
 
@@ -115,6 +126,9 @@ ver_reticulado_3d(ret_D,
     deshabilitar_ejes=True)
 
 plt.title("FU caso 1: 1.4 D ")
+# ret_D_desplazamientos_max=sorted(ret_D.desplazamientos_verticales, key=itemgetter(1))[0]
+# plt.title(f'Desplazamiento maximo en el nodo {ret_D_desplazamientos_max[0]}: {round(ret_D_desplazamientos_max[1]*1000,3)}[mm] ')
+# ret_D.desplazamientos_verticales=[]
 plt.show()
 
 
@@ -136,17 +150,20 @@ ver_reticulado_3d(ret_D,
     deshabilitar_ejes=True)
 
 plt.title("FU caso 2: 1.2 D + 1.6 L")
+# ret_D_desplazamientos_max=sorted(ret_D.desplazamientos_verticales, key=itemgetter(1))[0]
+# plt.title(f'Desplazamiento maximo en el nodo {ret_D_desplazamientos_max[0]}: {round(ret_D_desplazamientos_max[1]*1000,3)}[mm] ')
+# ret_D.desplazamientos_verticales=[]
 plt.show()
 
 
 peso = ret_D.calcular_peso_total()
 
-print(f"peso = {peso}")
+print(f"peso original = {peso}")
 
 
 
 barras_a_rediseñar = [i for i in range(30)]
-barras_a_rediseñar = [8,9,12,14,15]
+# barras_a_rediseñar = [8,9,12,14,15]
 
 #                   CASO DE CARGA MUERTA OPTIMIZADA
 barras_muerto = ret_D_muerto.obtener_barras()
@@ -177,10 +194,12 @@ ver_reticulado_3d(ret_D_muerto,
     deshabilitar_ejes=True)
 
 plt.title("Tensiones en caso 3: 1.4 D  OPTIMIZADO")
+# ret_D_muerto_desplazamientos_max=sorted(ret_D_muerto.desplazamientos_verticales, key=itemgetter(1))[0]
+# plt.title(f'Desplazamiento maximo en el nodo {ret_D_muerto_desplazamientos_max[0]}: {round(ret_D_muerto_desplazamientos_max[1]*1000,3)}[mm] ')
 plt.show()
 
 peso = ret_D_muerto.calcular_peso_total()
-print(f"peso_optimizado_ = {peso}")
+print(f"peso optimizado 1.4 D = {peso}")
 
 ver_reticulado_3d(ret_D_muerto, 
     opciones_nodos = {
@@ -232,8 +251,8 @@ ver_reticulado_3d(ret_D_vivo_muerto,
 plt.title("Tensiones en caso 4: 1.2 D + 1.6 L  OPTIMIZADO")
 plt.show()
 
-peso = ret_D_muerto.calcular_peso_total()
-print(f"peso_optimizado_ = {peso}")
+peso = ret_D_vivo_muerto.calcular_peso_total()
+print(f"peso optimizado 1.2 D + 1.6 L = {peso}")
 
 ver_reticulado_3d(ret_D_vivo_muerto, 
     opciones_nodos = {
@@ -255,9 +274,12 @@ plt.title("FU caso 4: 1.2 D + 1.6 L OPTIMIZADO")
 plt.show()
 
 
-barras_a_rediseñar = [8,9,12,14,15]
+
 
 #                            CASO DE 5 BARRAS PARA COMBINACION DE CARGA 2 OPTIMIZADA (1.2*D + 1.6*L)
+
+barras_a_rediseñar = [8,9,12,14,15]
+
 barras_5_barras= ret_D_5_barras.obtener_barras()
 for i in barras_a_rediseñar:
     barras_5_barras[i].rediseñar(f_5_D_5_barras[i],ret_D_5_barras)
@@ -289,7 +311,7 @@ plt.title("Tensiones en caso 5 BARRAS: 1.2 D + 1.6 L  OPTIMIZADO")
 plt.show()
 
 peso = ret_D_5_barras.calcular_peso_total()
-print(f"peso_optimizado_ = {peso}")
+print(f"peso optimizado 5 barras = {peso}")
 
 ver_reticulado_3d(ret_D_5_barras, 
     opciones_nodos = {
