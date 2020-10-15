@@ -9,6 +9,9 @@ Created on Tue Oct  6 11:56:45 2020
 from reticulado import Reticulado
 from barra import Barra
 from numpy import *
+from math import *
+
+ 
 def caso_D():
     # Unidades base
     m = 1.
@@ -38,20 +41,67 @@ def caso_D():
     # A1=15*(m**2)
     
     #Inicializar modelo
+    
     ret = Reticulado()
+    nodos=47
+    contador=0
+    for i in range (nodos):
+        contador+=1
+        ret.agregar_nodo(10+i*5,0,100)
+    contador1=contador   
+    for l in range(nodos):
+        ret.agregar_nodo(10+l*5,2,100)
+        contador+=1
+    contador2=contador
+    for j in range (nodos-1):
+        contador+=1
+        ret.agregar_nodo(12.5+j*5,0,100+sqrt(25-(2.5**2)))
+    for j in range (nodos-1):
+        contador+=1
+        ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
+            
+    contador3=contador
+        # ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
+    r = 8.0*cm
+    t = 5.0*mm 
+    """
+    REVISAR EN PROPS R,R DEBERIA SER R,T
+    """
+    props = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
+    for k1 in range (nodos-1):
+        ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
+    for k2 in range (nodos,2*nodos-1):
+        ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
+    for k3 in range (2*nodos+1,3*nodos-2):
+        ret.agregar_barra(Barra(k3, k3+1, *props))      # 1
+    for k4 in range (3*nodos+1,4*nodos-1):
+        ret.agregar_barra(Barra(k4, k4+1, *props))      # 1
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    # for k2 in range(nodos,2*nodos-1):
+    #     ret.agregar_barra(Barra(k2, k2+2, *props))
+        
+    # nodos=47
+    # for i in range (nodos):
+    #     ret.agregar_nodo(10+i*5,0,100) 
     
     #Nodos
-    ret.agregar_nodo(0, 0, 0)       #0
-    ret.agregar_nodo(5, 0, 0)      #1
-    ret.agregar_nodo(10, 0, 0)      #2
-    ret.agregar_nodo(15 ,0 ,0)      #3
-    ret.agregar_nodo(2.5, 1, 3.5)   #4
-    ret.agregar_nodo(7.5, 1, 3.5)  #5
-    ret.agregar_nodo(12.5, 1, 3.5)  #6
-    ret.agregar_nodo(0, 2, 0)       #7
-    ret.agregar_nodo(5, 2, 0)      #8
-    ret.agregar_nodo(10, 2, 0)      #9
-    ret.agregar_nodo(15, 2, 0)      #10
+
+    
+    # ret.agregar_nodo(10, 0, 100)       #7 inicio
+    # ret.agregar_nodo(10, 2, 100)       #7' inicio
+    
+    # ret.agregar_nodo(225, 0, 100)       #28 fin
+    # ret.agregar_nodo(225, 2, 100)       #28' fin
+    
+
     
     
     #Barras
@@ -65,8 +115,13 @@ def caso_D():
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
+    """
     props = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
-    
+    for k1 in range (nodos-1):
+        ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
+    for k2 in range(nodos,2*nodos-1)
+        ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
+        
     ret.agregar_barra(Barra(0, 1, *props))      # 1
     ret.agregar_barra(Barra(1, 2, *props))      # 2
     ret.agregar_barra(Barra(2, 3, *props))      # 3
@@ -98,22 +153,23 @@ def caso_D():
     ret.agregar_barra(Barra(4, 5, *props))      # 29
     ret.agregar_barra(Barra(5, 6, *props))      # 30
     
-    
+    """
     # nodo 1
     ret.agregar_restriccion(0, 0, 0)
     ret.agregar_restriccion(0, 1, 0)
     ret.agregar_restriccion(0, 2, 0)
-    # nodo 7 
-    ret.agregar_restriccion(7, 0, 0)
-    ret.agregar_restriccion(7, 1, 0)
-    ret.agregar_restriccion(7, 2, 0)
-    # nodo 3
-    ret.agregar_restriccion(3, 1, 0)
-    ret.agregar_restriccion(3, 2, 0)
+    # nodo 46 
+    ret.agregar_restriccion(nodos-1, 0, 0)
+    ret.agregar_restriccion(nodos-1, 1, 0)
+    ret.agregar_restriccion(nodos-1, 2, 0)
+    # nodo 47
+    ret.agregar_restriccion(nodos, 0, 0)
+    ret.agregar_restriccion(nodos, 1, 0)
+    ret.agregar_restriccion(nodos, 2, 0)
     
     # nodo 10
-    ret.agregar_restriccion(10, 1, 0)
-    ret.agregar_restriccion(10, 2, 0)
-    
+    ret.agregar_restriccion(2*nodos-1, 0, 0)
+    ret.agregar_restriccion(2*nodos-1, 1, 0)
+    ret.agregar_restriccion(2*nodos-1, 2, 0)    
     return ret
 

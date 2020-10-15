@@ -39,64 +39,35 @@ def caso_L():
     
     #Inicializar modelo
     ret = Reticulado()
-    
-    #Nodos
-    ret.agregar_nodo(0, 0, 0)       #0
-    ret.agregar_nodo(5, 0, 0)      #1
-    ret.agregar_nodo(10, 0, 0)      #2
-    ret.agregar_nodo(15 ,0 ,0)      #3
-    ret.agregar_nodo(2.5, 1, 3.5)   #4
-    ret.agregar_nodo(7.5, 1, 3.5)  #5
-    ret.agregar_nodo(12.5, 1, 3.5)  #6
-    ret.agregar_nodo(0, 2, 0)       #7
-    ret.agregar_nodo(5, 2, 0)      #8
-    ret.agregar_nodo(10, 2, 0)      #9
-    ret.agregar_nodo(15, 2, 0)      #10
-    
-    
-    #Barras
-    """
-    PREGUNTAR, PARECIERA SER QUE ES UNA BARRA CUADRADA
-    """
-    # A = (8*cm)**2
-    # r = sqrt(A/3.141593)
-    r = 8*cm
-    t = 5*mm 
+    nodos=47
+    for i in range (nodos):
+        ret.agregar_nodo(10+i*5,0,100)
+    for l in range(nodos):
+        ret.agregar_nodo(10+l*5,2,100)
+    for j in range (nodos-1):
+        ret.agregar_nodo(12.5+j*5,0,100+sqrt(25-(2.5**2)))
+    for j in range (nodos-1):
+        ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
+        # ret.agregar_nodo(10+i*5,2,100)
+    # for j in range (nodos-1):
+    #     ret.agregar_nodo(12.5+j*5,0,100+sqrt(25-(2.5**2)))
+        # ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
+    r = 8.0*cm
+    t = 5.0*mm 
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
-    props = [r, t, 200*GPa, 0*7600*kg/m**3, 420*MPa]
-    
-    ret.agregar_barra(Barra(0, 1, *props))      # 1
-    ret.agregar_barra(Barra(1, 2, *props))      # 2
-    ret.agregar_barra(Barra(2, 3, *props))      # 3
-    ret.agregar_barra(Barra(3, 10, *props))     # 4
-    ret.agregar_barra(Barra(9, 10, *props))     # 5
-    ret.agregar_barra(Barra(8, 9, *props))      # 6
-    ret.agregar_barra(Barra(7, 8, *props))      # 7
-    ret.agregar_barra(Barra(0, 7, *props))      # 8
-    ret.agregar_barra(Barra(1, 7, *props))      # 9
-    ret.agregar_barra(Barra(0, 8, *props))      # 10
-    ret.agregar_barra(Barra(1, 8, *props))      # 11
-    ret.agregar_barra(Barra(2, 8, *props))      # 12
-    ret.agregar_barra(Barra(1, 9, *props))      # 13
-    ret.agregar_barra(Barra(2, 9, *props))      # 14
-    ret.agregar_barra(Barra(3, 9, *props))      # 15
-    ret.agregar_barra(Barra(2, 10, *props))     # 16
-    ret.agregar_barra(Barra(4, 7, *props))      # 17
-    ret.agregar_barra(Barra(0, 4, *props))      # 18
-    ret.agregar_barra(Barra(4, 8, *props))      # 19
-    ret.agregar_barra(Barra(1, 4, *props))      # 20
-    ret.agregar_barra(Barra(5, 8, *props))      # 21
-    ret.agregar_barra(Barra(1, 5, *props))      # 22
-    ret.agregar_barra(Barra(5, 9, *props))      # 23
-    ret.agregar_barra(Barra(2, 5, *props))      # 24
-    ret.agregar_barra(Barra(6, 9, *props))      # 25
-    ret.agregar_barra(Barra(2, 6, *props))      # 26
-    ret.agregar_barra(Barra(6, 10, *props))     # 27
-    ret.agregar_barra(Barra(3, 6, *props))      # 28
-    ret.agregar_barra(Barra(4, 5, *props))      # 29
-    ret.agregar_barra(Barra(5, 6, *props))      # 30
+    props = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
+    for k1 in range (nodos-1):
+        ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
+    for k2 in range (nodos,2*nodos-1):
+        ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
+    for k3 in range (2*nodos+2,3*nodos-2):
+        ret.agregar_barra(Barra(k3, k3+1, *props))      # 1
+    for k4 in range (3*nodos+1,4*nodos-1):
+        ret.agregar_barra(Barra(k4, k4+1, *props)) 
+    # for k2 in range(nodos,2*nodos-1):
+    #     ret.agregar_barra(Barra(k2, k2+2, *props))
     
     
     # nodo 1
@@ -116,15 +87,32 @@ def caso_L():
     ret.agregar_restriccion(10, 2, 0)
     
     # Carga viva en nodos 
-    ret.agregar_fuerza(0, 2, -Q*A0*g)
-    ret.agregar_fuerza(7, 2, -Q*A0*g)
-    ret.agregar_fuerza(3, 2, -Q*A0*g)
-    ret.agregar_fuerza(10, 2, -Q*A0*g)
+    # ret.agregar_fuerza(0, 2, -Q*A0*g)
+    # ret.agregar_fuerza(7, 2, -Q*A0*g)
+    # ret.agregar_fuerza(3, 2, -Q*A0*g)
+    # ret.agregar_fuerza(10, 2, -Q*A0*g)
     
-    ret.agregar_fuerza(1, 2, -Q*A1*g)
-    ret.agregar_fuerza(2, 2, -Q*A1*g)
-    ret.agregar_fuerza(8, 2, -Q*A1*g)
-    ret.agregar_fuerza(9, 2, -Q*A1*g)
+    # ret.agregar_fuerza(1, 2, -Q*A1*g)
+    # ret.agregar_fuerza(2, 2, -Q*A1*g)
+    # ret.agregar_fuerza(8, 2, -Q*A1*g)
+    # ret.agregar_fuerza(9, 2, -Q*A1*g)
+     # nodo 1
+    ret.agregar_restriccion(0, 0, 0)
+    ret.agregar_restriccion(0, 1, 0)
+    ret.agregar_restriccion(0, 2, 0)
+    # nodo 46 
+    ret.agregar_restriccion(nodos-1, 0, 0)
+    ret.agregar_restriccion(nodos-1, 1, 0)
+    ret.agregar_restriccion(nodos-1, 2, 0)
+    # nodo 47
+    ret.agregar_restriccion(nodos, 0, 0)
+    ret.agregar_restriccion(nodos, 1, 0)
+    ret.agregar_restriccion(nodos, 2, 0)
+    
+    # nodo 10
+    ret.agregar_restriccion(2*nodos-1, 0, 0)
+    ret.agregar_restriccion(2*nodos-1, 1, 0)
+    ret.agregar_restriccion(2*nodos-1, 2, 0)    
 
     return ret
 

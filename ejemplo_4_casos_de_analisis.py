@@ -18,7 +18,7 @@ ver_reticulado_3d(ret_D,
 	"ver_numeros_de_barras": False
 	}, 
     llamar_show=True,
-    zoom=180.,
+    zoom=900.,
     deshabilitar_ejes=True)
 
 
