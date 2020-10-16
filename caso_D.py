@@ -43,8 +43,10 @@ def caso_D():
     #Inicializar modelo
     
     ret = Reticulado()
-    nodos=47
+    nodos=30
     contador=0
+    altura1=sqrt(25-(2.5**2))
+    altura2=30
     for i in range (nodos):
         contador+=1
         ret.agregar_nodo(10+i*5,0,100)
@@ -55,15 +57,13 @@ def caso_D():
     contador2=contador
     for j in range (nodos-1):
         contador+=1
-        ret.agregar_nodo(12.5+j*5,0,100+sqrt(25-(2.5**2)))
-    for j in range (nodos-1):
-        contador+=1
-        ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
+        ret.agregar_nodo(12.5+j*5,1,100+altura2)
+
             
     contador3=contador
         # ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
-    r = 8.0*cm
-    t = 5.0*mm 
+    r = 15.0*cm
+    t = 50.0*mm 
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
@@ -72,15 +72,29 @@ def caso_D():
         ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
     for k2 in range (nodos,2*nodos-1):
         ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
-    for k3 in range (2*nodos+1,3*nodos-2):
+    for k3 in range (2*nodos,3*nodos-2):
         ret.agregar_barra(Barra(k3, k3+1, *props))      # 1
-    for k4 in range (3*nodos+1,4*nodos-1):
-        ret.agregar_barra(Barra(k4, k4+1, *props))      # 1
+
+    for k4 in range (nodos-2):
+        ret.agregar_barra(Barra(k4+1, k4+nodos+1, *props))
     
+    for k5 in range (nodos-1):
+        ret.agregar_barra(Barra(k5, k5+nodos*2, *props))
+        ret.agregar_barra(Barra(k5+nodos*2,k5+1, *props))
+        
+    for k6 in range (nodos-1):
+        ret.agregar_barra(Barra(k6+nodos, k6+nodos*2, *props))
+        ret.agregar_barra(Barra(k6+nodos*2,k6+nodos+1, *props))
     
-    
-    
-    
+    """
+        for k5 in range (nodos-1):
+            ret.agregar_barra(Barra(k5*3, k5*2+nodos*2+1, *props))
+            ret.agregar_barra(Barra(k5*2+nodos*2+1,k5*3+3, *props))
+            
+        for k6 in range (nodos-1):
+            ret.agregar_barra(Barra(k6*3+nodos, k6*2+nodos*2+1, *props))
+            ret.agregar_barra(Barra(k6*2+nodos*2+1,k6*3+nodos+3, *props))
+    """
     
     
     
@@ -154,22 +168,22 @@ def caso_D():
     ret.agregar_barra(Barra(5, 6, *props))      # 30
     
     """
-    # nodo 1
+    # nodo 0
     ret.agregar_restriccion(0, 0, 0)
     ret.agregar_restriccion(0, 1, 0)
     ret.agregar_restriccion(0, 2, 0)
-    # nodo 46 
+    # nodo 42 
     ret.agregar_restriccion(nodos-1, 0, 0)
     ret.agregar_restriccion(nodos-1, 1, 0)
     ret.agregar_restriccion(nodos-1, 2, 0)
-    # nodo 47
+    # nodo 43
     ret.agregar_restriccion(nodos, 0, 0)
     ret.agregar_restriccion(nodos, 1, 0)
     ret.agregar_restriccion(nodos, 2, 0)
     
-    # nodo 10
-    ret.agregar_restriccion(2*nodos-1, 0, 0)
-    ret.agregar_restriccion(2*nodos-1, 1, 0)
-    ret.agregar_restriccion(2*nodos-1, 2, 0)    
+    # nodo 85
+    ret.agregar_restriccion(nodos*2-1, 0, 0)
+    ret.agregar_restriccion(nodos*2-1, 1, 0)
+    ret.agregar_restriccion(nodos*2-1, 2, 0)    
     return ret
 

@@ -66,7 +66,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": True,
+        "ver_dato_en_barras": False,
         "dato": f_1,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -81,6 +81,7 @@ plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D.u*1.4),3)} [mm]"
 # print(array(ret_D.desplazamientos_verticales)[:,0])
 # ret_D.desplazamientos_verticales=[]
 # plt.legend()
+plt.savefig("grafico_de_prueba1.PNG")
 plt.show()
 
 
@@ -94,7 +95,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": True,
+        "ver_dato_en_barras": False,
         "dato": f_2,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -122,7 +123,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": True,
+        "ver_dato_en_barras": False,
         "dato": FU_caso1,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -148,7 +149,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": True,
+        "ver_dato_en_barras": False,
         "dato": FU_caso2,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -169,13 +170,14 @@ peso = ret_D.calcular_peso_total()
 print(f"peso original = {peso}")
 
 
-
+"""
 barras_a_rediseñar = [i for i in range(30)]
 # barras_a_rediseñar = [8,9,12,14,15]
 
 #                   CASO DE CARGA MUERTA OPTIMIZADA
 barras_muerto = ret_D_muerto.obtener_barras()
 barras_vivas=ret_L.obtener_barras()
+
 for i in barras_a_rediseñar:
     barras_muerto[i].rediseñar(f_3_D_muerto[i],ret_D_muerto)
     barras_vivas[i].rediseñar(f_3_D_muerto[i],ret_D_muerto)
@@ -383,3 +385,4 @@ ver_reticulado_3d(ret_D_5_barras,
 plt.suptitle("FU caso 5 BARRAS: 1.2 D + 1.6 L OPTIMIZADO")
 plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D_5_barras.u*1.2+ret_L.u*1.6),3)} [mm]")
 plt.show()
+"""
