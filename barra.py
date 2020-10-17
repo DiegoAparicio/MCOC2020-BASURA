@@ -95,13 +95,39 @@ class Barra(object):
         """Para la fuerza Fu (proveniente de una combinacion de cargas)
         revisar si esta barra cumple las disposiciones de diseño.
         """
-        A=self.calcular_area()
-        Fn=A*self.σy
+        # A=self.calcular_area()
+        # Fn=A*self.σy
         
-        if ϕ*Fn < abs(Fu):
+        # if ϕ*Fn < abs(Fu):
+        #     return False
+        # else:
+        #     return True
+        A = self.calcular_area()
+        Fn = A * self.σy
+
+        #Revisar resistencia nominal
+        if abs(Fu) > ϕ*Fn:
+            print(f"Resistencia nominal Fu = {Fu} ϕ*Fn = {ϕ*Fn}")
+        return False
+
+        L = self.calcular_largo(ret)
+        I = np.pi/4 * (self.R**4 - (self.R - self.t)**4)
+        i = np.sqrt(I/A)
+
+        #Revisar radio de giro
+        if Fu >= 0 and L/i > 300:
+            print(f"Esbeltez Fu = {Fu} L/i = {L/i}")
             return False
-        else:
-            return True
+
+        #Revisar carga critica de pandeo
+        if Fu < 0:  #solo en traccion
+            Pcr = np.pi**2*self.E*I / L**2
+            if abs(Fu) > Pcr:
+                print(f"Pandeo Fu = {Fu} Pcr = {Pcr}")
+                return False
+
+        #Si pasa todas las pruebas, estamos bien
+        return True
         
 
 
