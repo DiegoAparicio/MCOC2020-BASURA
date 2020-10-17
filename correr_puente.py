@@ -1,5 +1,5 @@
-from caso_D import caso_D
-from caso_L import caso_L
+from caso_D_1 import caso_D
+from caso_L_1 import caso_L
 
 ret_D = caso_D()
 ret_L = caso_L()

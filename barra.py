@@ -150,8 +150,8 @@ class Barra(object):
         """
         
         
-        lista_R=np.arange(0.01,0.08,0.005)
-        lista_t=np.arange(0.001,0.006,0.001)
+        lista_R=np.arange(0.01,0.20,0.005)
+        lista_t=np.arange(0.001,0.100,0.005)
         todas_las_combinaciones = list(itertools.product(lista_R, lista_t))
         
         lista_pasa_esbeltez=[]
@@ -180,8 +180,11 @@ class Barra(object):
                 lista_aux=[j[0],j[1],eq2]
                 lista_pasa_esbeltez_y_fu.append(lista_aux)
                 
-        
+        # print(lista_pasa_esbeltez_y_fu)
         maximos_R_t=sorted(lista_pasa_esbeltez_y_fu, key=itemgetter(2))[-1] #se obtiene el radio y espesor respectivo para el maximo factor de utilizacion
+        # print(f"R:{maximos_R_t[0]}")
+        # print(f"t:{maximos_R_t[1]}")
+        
         #print (maximos_R_t)
         self.R=maximos_R_t[0]
         self.t=maximos_R_t[1]

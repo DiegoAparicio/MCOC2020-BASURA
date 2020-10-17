@@ -39,9 +39,9 @@ def caso_L():
     
     #Inicializar modelo
     ret = Reticulado()
-    nodos=30
-    altura1=sqrt(25-(2.5**2))
-    altura2=30
+    nodos=43
+    altura2=sqrt(25-(2.5**2))
+    altura2=20
     for i in range (nodos):
         ret.agregar_nodo(10+i*5,0,100)
     for l in range(nodos):
@@ -53,8 +53,8 @@ def caso_L():
     # for j in range (nodos-1):
     #     ret.agregar_nodo(12.5+j*5,0,100+sqrt(25-(2.5**2)))
         # ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
-    r = 15.0*cm
-    t = 50.0*mm 
+    r = 20.0*cm
+    t = 40.0*mm 
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
