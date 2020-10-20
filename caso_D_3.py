@@ -59,11 +59,11 @@ def caso_D():
         if i != nodos//2 and i!= nodos//2+1:    
             
             ret.agregar_nodo(10+i*factor-floor(siguiente_1),0,100) # nodos 0-36
-            # print(f'AA nodo {i}:{10+i*factor-floor(siguiente_1)}')
+            print(f'AA nodo {i}:{10+i*factor-floor(siguiente_1)}')
         else:
             
             ret.agregar_nodo(10+i*factor-siguiente_1,0,100)
-            # print(f'BB nodo {i}:{10+i*factor-siguiente_1}')
+            print(f'BB nodo {i}:{10+i*factor-siguiente_1}')
             siguiente_1+=0.5
     siguiente_2=0.5
     for l in range(nodos):
