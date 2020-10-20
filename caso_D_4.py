@@ -134,8 +134,8 @@ def caso_D():
     """
     Barras calle
     """
-    r = 20.0*cm
-    t = 40.0*mm 
+    r = 10.0*cm
+    t = 20.0*mm 
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
@@ -152,6 +152,7 @@ def caso_D():
     for i in range (18):
         ret.agregar_barra(Barra(i, i+38, *props))
         ret.agregar_barra(Barra(i+55,i+19 , *props))
+    
     # arco1 parte en 75
     for i in range(16):
         if i ==0:
@@ -234,6 +235,8 @@ def caso_D():
         else:
             ret.agregar_barra(Barra(i*2+89, i*2+92, *props))
             ret.agregar_barra(Barra(i+113, i*2+92, *props))
+    
+    # props = [r/5, 20*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Cables lado 1 
     for i in range (15):
         if i==0:
@@ -254,4 +257,22 @@ def caso_D():
             ret.agregar_barra(Barra(i+106, i*2+3+37, *props))
             ret.agregar_barra(Barra(i+106, i*2+4+37, *props))
             ret.agregar_barra(Barra(i+106, i*2+5+37, *props))
+            
+    # nodo 0
+    ret.agregar_restriccion(0, 0, 0)
+    ret.agregar_restriccion(0, 1, 0)
+    ret.agregar_restriccion(0, 2, 0)
+    # nodo 36 
+    ret.agregar_restriccion(36, 0, 0)
+    ret.agregar_restriccion(36, 1, 0)
+    ret.agregar_restriccion(36, 2, 0)
+    # nodo 37
+    ret.agregar_restriccion(37, 0, 0)
+    ret.agregar_restriccion(37, 1, 0)
+    ret.agregar_restriccion(37, 2, 0)
+    
+    # nodo 73
+    ret.agregar_restriccion(73, 0, 0)
+    ret.agregar_restriccion(73, 1, 0)
+    ret.agregar_restriccion(73, 2, 0) 
     return ret

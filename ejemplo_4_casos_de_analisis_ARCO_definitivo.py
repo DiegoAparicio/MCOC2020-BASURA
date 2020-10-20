@@ -20,7 +20,7 @@ ret_D_muerto = caso_D()
 ret_D_vivo_muerto = caso_D()
 ret_D_5_barras = caso_D()
 factor_a=30.0
-numero_de_grafica=5
+numero_de_grafica=7
 ver_reticulado_3d(ret_D, 
 	axis_Equal=True, 
 	opciones_barras={
@@ -71,8 +71,8 @@ for i in range (len(f_1)):
     else:
         a=f_2[i]
     lista_max_Fu.append(a)
-for i in range(len(lista_max_Fu)):
-    print(f_1[i],f_2[i],"    ",lista_max_Fu[i])
+# for i in range(len(lista_max_Fu)):
+    # print(f_1[i],f_2[i],"    ",lista_max_Fu[i])
 
 
 FU_caso_general=ret_D.recuperar_factores_de_utilizacion(lista_max_Fu)
@@ -164,7 +164,7 @@ plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D.u*1.2+ret_L.u*1.
 
 plt.show()
 
-
+# print
 
 # CASO 3
 ver_reticulado_3d(ret_D, 
@@ -221,3 +221,99 @@ plt.show()
 peso = ret_D.calcular_peso_total()
 
 print(f"peso original = {peso}")
+
+barras_a_rediseñar = [i for i in range(386)]
+
+# barras_a_rediseñar = [8,9,12,14,15]
+
+#                   CASO DE CARGA MUERTA OPTIMIZADA
+barras_muerto = ret_D_muerto.obtener_barras()
+# print(barras_muerto)
+barras_vivas=ret_L.obtener_barras()
+
+for i in barras_a_rediseñar:
+    barras_muerto[i].rediseñar(f_3_D_muerto[i],ret_D_muerto)
+    barras_vivas[i].rediseñar(f_3_D_muerto[i],ret_D_muerto)
+    # print(f'R:{ret_D_muerto}')
+        
+
+ret_D_muerto.ensamblar_sistema()
+ret_D_muerto.resolver_sistema()        
+
+ret_L.ensamblar_sistema()
+ret_L.resolver_sistema()
+
+f_L = ret_L.recuperar_fuerzas()
+
+FU_caso_muerto = ret_D_muerto.recuperar_factores_de_utilizacion(f_3_D_muerto)
+f_D_muerto = ret_D_muerto.recuperar_fuerzas()
+f_3_D_muerto = 1.4*f_D_muerto  
+
+"""
+AÑADIDO NUEVO
+"""
+cumple_combinacion_1 = ret_D.chequear_diseño(f_1)
+cumple_combinacion_2 = ret_L.chequear_diseño(f_2)
+
+condicion_1=""
+condicion_2=""
+
+if cumple_combinacion_1:
+    condicion_1="Combinación de carga 1 : cumple "
+else:
+    condicion_1="Combinación de carga 1 : NO cumple "
+    
+if cumple_combinacion_2:
+    condicion_2="Combinación de carga 2 : cumple "
+else:
+    condicion_2="Combinación de carga 2 :NO cumple "
+
+
+
+ver_reticulado_3d(ret_D_muerto, 
+    opciones_nodos = {
+        "usar_posicion_deformada": True,
+        "factor_amplificacion_deformada": factor_a,
+        "datos_desplazamientos_nodales":ret_D_muerto.u*1.4,
+    },
+    opciones_barras = {
+        "color_barras_por_dato": True,
+        "ver_numeros_de_barras": False,
+        "ver_dato_en_barras": True,
+        "dato": f_3_D_muerto,
+        "color_fondo": [1,1,1,0.4]
+    }, 
+    llamar_show=False,
+    zoom=180.,
+    deshabilitar_ejes=True)
+
+plt.suptitle("Tensiones en caso 3: 1.4 D  OPTIMIZADO")
+plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D_muerto.u*1.4),3)} [mm]")
+# ret_D_muerto_desplazamientos_max=sorted(ret_D_muerto.desplazamientos_verticales, key=itemgetter(1))[0]
+# plt.title(f'Desplazamiento maximo en el nodo {ret_D_muerto_desplazamientos_max[0]}: {round(ret_D_muerto_desplazamientos_max[1]*1000,3)}[mm] ')
+plt.show()
+
+peso = ret_D_muerto.calcular_peso_total()
+print(f"peso optimizado 1.4 D = {peso}")
+
+ver_reticulado_3d(ret_D_muerto, 
+    opciones_nodos = {
+        "usar_posicion_deformada": True,
+        "factor_amplificacion_deformada": factor_a,
+        "datos_desplazamientos_nodales":ret_D_muerto.u*1.4,
+    },
+    opciones_barras = {
+        "color_barras_por_dato": True,
+        "ver_numeros_de_barras": False,
+        "ver_dato_en_barras": True,
+        "dato": FU_caso_muerto,
+        "color_fondo": [1,1,1,0.4]
+    }, 
+    llamar_show=False,
+    zoom=180.,
+    deshabilitar_ejes=True)
+
+plt.suptitle("FU caso 3: 1.4 D OPTIMIZADO")
+# plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D_muerto.u*1.4),3)} [mm]")
+plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D.u*1.4),3)} [mm]\n {condicion_1}")
+plt.show()

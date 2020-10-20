@@ -134,8 +134,8 @@ def caso_L():
     """
     Barras calle
     """
-    r = 20.0*cm
-    t = 40.0*mm 
+    r = 10.0*cm
+    t = 20.0*mm 
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
@@ -152,6 +152,7 @@ def caso_L():
     for i in range (18):
         ret.agregar_barra(Barra(i, i+38, *props))
         ret.agregar_barra(Barra(i+55,i+19 , *props))
+    # props = [10.0*cm, 20*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # arco1 parte en 75
     for i in range(16):
         if i ==0:
@@ -239,6 +240,7 @@ def caso_L():
         else:
             ret.agregar_barra(Barra(i*2+89, i*2+92, *props))
             ret.agregar_barra(Barra(i+113, i*2+92, *props))
+    # props = [r/5, 20*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Cables lado 1
     for i in range (15):
         if i==0:

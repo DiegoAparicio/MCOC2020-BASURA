@@ -20,7 +20,7 @@ from mpl_toolkits.mplot3d import Axes3D
 #Opciones para nodos
 opc_nodos_default = {
     "marcador_nodos": "o", 
-    "ver_numeros_de_nodos": True,
+    "ver_numeros_de_nodos": False,
     "color_nodos": "k",
     "color_borde_nodos": [0.7,0.7,0.7],
     "usar_posicion_deformada": False,
