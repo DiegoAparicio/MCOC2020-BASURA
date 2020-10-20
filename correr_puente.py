@@ -18,13 +18,13 @@ f_L = ret_L.recuperar_fuerzas()
 f_1 = 1.4*f_D           #Combinacion 1
 f_2 = 1.2*f_D + 1.6*f_L #Combinacion 2
 
+
 # Calcular factores 
 cumple_combinacion_1 = ret_D.chequear_diseño(f_1)
 cumple_combinacion_2 = ret_L.chequear_diseño(f_2)
 
 
 peso_D = ret_D.calcular_peso_total()
-peso_L = ret_L.calcular_peso_total()
 
 
 if cumple_combinacion_1:
@@ -38,9 +38,7 @@ else:
     print("Combinación de carga 2 : NO cumple ")
 
 
-if abs(peso_D - peso_L) < 1e-9:
+if cumple_combinacion_1 and cumple_combinacion_2:
     print(f"Peso total = {peso_D}")
-else:
-    print(f"Estructura pesa distinto en caso D y caso L!")
-    print(f"peso_D = {peso_D}")
-    print(f"peso_L = {peso_L}")
+
+print(f"cantidad de barras con error: {len(ret_D.lista_barras_error)}")

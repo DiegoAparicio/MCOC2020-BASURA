@@ -31,9 +31,9 @@ def caso_L():
     GPa = 1000*MPa
     
     #Parametros
-    L = 5.0  *m
-    F = 100*KN
-    B = 2.0 *m
+    # L = 5.0  *m
+    # F = 100*KN
+    # B = 2.0 *m
     #Parametros cargas vivas
     Q=400*(kg/(m**2))
     g=9.8*(m/(s**2))
@@ -59,11 +59,11 @@ def caso_L():
         if i != nodos//2 and i!= nodos//2+1:    
             
             ret.agregar_nodo(10+i*factor-floor(siguiente_1),0,100) # nodos 0-36
-            print(f'AA nodo {i}:{10+i*factor-floor(siguiente_1)}')
+            
         else:
             
             ret.agregar_nodo(10+i*factor-siguiente_1,0,100)
-            print(f'BB nodo {i}:{10+i*factor-siguiente_1}')
+            
             siguiente_1+=0.5
     siguiente_2=0.5
     for l in range(nodos):
@@ -139,7 +139,7 @@ def caso_L():
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
-    props = [r, t, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [0.05, 3*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Horizontales
     for k1 in range (nodos-1):
         ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
@@ -148,11 +148,14 @@ def caso_L():
     # Verticales
     for k4 in range (nodos-2):
         ret.agregar_barra(Barra(k4+1, k4+nodos+1, *props))
+        
+    props = [5*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa] 
     # Diagonales
     for i in range (18):
         ret.agregar_barra(Barra(i, i+38, *props))
         ret.agregar_barra(Barra(i+55,i+19 , *props))
-    # props = [10.0*cm, 20*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
+        
+    props = [r*2, t*4, 200*GPa, 7600*kg/m**3, 420*MPa]
     # arco1 parte en 75
     for i in range(16):
         if i ==0:
@@ -162,6 +165,7 @@ def caso_L():
         else:
             ret.agregar_barra(Barra((i-1)*2+75, i*2+75, *props))
     # arco2 parte en 74
+    props = [r*2, t*6, 200*GPa, 7600*kg/m**3, 420*MPa]
     for i in range(17):
         if i ==0:
             # ret.agregar_barra(Barra(i+2, i+74, *props))
@@ -169,7 +173,8 @@ def caso_L():
         elif i==16:
             ret.agregar_barra(Barra(104, 105, *props))            
         else:
-            ret.agregar_barra(Barra((i-1)*2+74, i*2+74, *props))
+            ret.agregar_barra(Barra((i-1)*2+74, i*2+74, *props))    # # arco3
+    props = [r*2, t*4, 200*GPa, 7600*kg/m**3, 420*MPa]
         
     # arco3 
     for i in range(16):
@@ -240,26 +245,27 @@ def caso_L():
         else:
             ret.agregar_barra(Barra(i*2+89, i*2+92, *props))
             ret.agregar_barra(Barra(i+113, i*2+92, *props))
-    # props = [r/5, 20*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [18*cm, 180*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props_m = [20*cm, 200*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Cables lado 1
     for i in range (15):
         if i==0:
             ret.agregar_barra(Barra(i*2+75, i*3+3, *props))
-            ret.agregar_barra(Barra(i*2+75, i*3+4, *props))
+            ret.agregar_barra(Barra(i*2+75, i*3+4, *props_m))
             ret.agregar_barra(Barra(i*2+75, i*3+5, *props))
         else:
             ret.agregar_barra(Barra(i*2+75, i*2+3, *props))
-            ret.agregar_barra(Barra(i*2+75, i*2+4, *props))
+            ret.agregar_barra(Barra(i*2+75, i*2+4, *props_m))
             ret.agregar_barra(Barra(i*2+75, i*2+5, *props))
     # Cables lado 2
     for i in range (15):
         if i==0:
             ret.agregar_barra(Barra(i+106, i*3+3+37, *props))
-            ret.agregar_barra(Barra(i+106, i*3+4+37, *props))
+            ret.agregar_barra(Barra(i+106, i*3+4+37, *props_m))
             ret.agregar_barra(Barra(i+106, i*3+5+37, *props))
         else:
             ret.agregar_barra(Barra(i+106, i*2+3+37, *props))
-            ret.agregar_barra(Barra(i+106, i*2+4+37, *props))
+            ret.agregar_barra(Barra(i+106, i*2+4+37, *props_m))
             ret.agregar_barra(Barra(i+106, i*2+5+37, *props))
     
     
@@ -312,5 +318,38 @@ def caso_L():
     ret.agregar_restriccion(73, 0, 0)
     ret.agregar_restriccion(73, 1, 0)
     ret.agregar_restriccion(73, 2, 0) 
+    
+    # #nodos opcionales
+    # ret.agregar_restriccion(2, 0, 0)
+    # ret.agregar_restriccion(2, 1, 0)
+    # ret.agregar_restriccion(2, 2, 0)
+    
+    # ret.agregar_restriccion(39, 0, 0)
+    # ret.agregar_restriccion(39, 1, 0)
+    # ret.agregar_restriccion(39, 2, 0)
+    
+    # ret.agregar_restriccion(34, 0, 0)
+    # ret.agregar_restriccion(34, 1, 0)
+    # ret.agregar_restriccion(34, 2, 0)
+    
+    # ret.agregar_restriccion(71, 0, 0)
+    # ret.agregar_restriccion(71, 1, 0)
+    # ret.agregar_restriccion(71, 2, 0)
+    
+    # ret.agregar_restriccion(1, 0, 0)
+    # ret.agregar_restriccion(1, 1, 0)
+    # ret.agregar_restriccion(1, 2, 0)
+    
+    # ret.agregar_restriccion(38, 0, 0)
+    # ret.agregar_restriccion(38, 1, 0)
+    # ret.agregar_restriccion(38, 2, 0)
+    
+    # ret.agregar_restriccion(35, 0, 0)
+    # ret.agregar_restriccion(35, 1, 0)
+    # ret.agregar_restriccion(35, 2, 0)
+    
+    # ret.agregar_restriccion(72, 0, 0)
+    # ret.agregar_restriccion(72, 1, 0)
+    # ret.agregar_restriccion(72, 2, 0)
     
     return ret

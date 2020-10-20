@@ -15,6 +15,7 @@ class Reticulado(object):
         self.restricciones = {}
         self.Ndimensiones = 3
         self.has_solution = False
+        self.lista_barras_error = []
         self.desplazamientos_verticales=[]
 
     def agregar_nodo(self, x, y, z=0):
@@ -188,7 +189,8 @@ class Reticulado(object):
 
     def rediseñar(self, Fu, ϕ=0.9):
         for i,b in enumerate(self.barras):
-            b.rediseñar(Fu[i], self, ϕ)
+           print(f"\n\nBarra {i}")
+           b.rediseñar(Fu[i], self, ϕ)
 
 
     def chequear_diseño(self, Fu, ϕ=0.9):
@@ -199,10 +201,12 @@ class Reticulado(object):
           cumple = True
           for i,b in enumerate(self.barras):
               if not b.chequear_diseño(Fu[i], self, ϕ):
-                  print(f"----> Barra {i} no cumple algun criterio. ")
+                  nodos_conexion = b.obtener_conectividad()
+                  self.lista_barras_error.append([i,nodos_conexion[0],nodos_conexion[1]])
+                  print(f"----> Barra {i} no cumple algun criterio. nodos: {nodos_conexion[0]} a {nodos_conexion[1]}")
                   cumple = False
           return cumple
-
+          
 
 
 

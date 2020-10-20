@@ -95,20 +95,13 @@ class Barra(object):
         """Para la fuerza Fu (proveniente de una combinacion de cargas)
         revisar si esta barra cumple las disposiciones de diseño.
         """
-        # A=self.calcular_area()
-        # Fn=A*self.σy
-        
-        # if ϕ*Fn < abs(Fu):
-        #     return False
-        # else:
-        #     return True
         A = self.calcular_area()
         Fn = A * self.σy
 
         #Revisar resistencia nominal
         if abs(Fu) > ϕ*Fn:
             print(f"Resistencia nominal Fu = {Fu} ϕ*Fn = {ϕ*Fn}")
-        return False
+            return False
 
         L = self.calcular_largo(ret)
         I = np.pi/4 * (self.R**4 - (self.R - self.t)**4)
@@ -120,7 +113,7 @@ class Barra(object):
             return False
 
         #Revisar carga critica de pandeo
-        if Fu < 0:  #solo en traccion
+        if Fu < 0:  #solo en compresion
             Pcr = np.pi**2*self.E*I / L**2
             if abs(Fu) > Pcr:
                 print(f"Pandeo Fu = {Fu} Pcr = {Pcr}")
@@ -150,8 +143,8 @@ class Barra(object):
         """
         
         
-        lista_R=np.arange(0.01,0.20,0.005)
-        lista_t=np.arange(0.001,0.100,0.005)
+        lista_R=np.arange(0.01,self.R*2,0.005)
+        lista_t=np.arange(0.001,self.t*2,0.005)
         todas_las_combinaciones = list(itertools.product(lista_R, lista_t))
         
         lista_pasa_esbeltez=[]

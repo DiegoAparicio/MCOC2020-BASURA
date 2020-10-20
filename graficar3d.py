@@ -16,7 +16,6 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 
-
 #Opciones para nodos
 opc_nodos_default = {
     "marcador_nodos": "o", 
