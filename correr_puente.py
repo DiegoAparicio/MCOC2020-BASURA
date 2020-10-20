@@ -42,3 +42,8 @@ if cumple_combinacion_1 and cumple_combinacion_2:
     print(f"Peso total = {peso_D}")
 
 print(f"cantidad de barras con error: {len(ret_D.lista_barras_error)}")
+peso = ret_D.calcular_peso_total()
+
+print(f"cantidad de barras con error: {len(ret_L.lista_barras_error)}")
+
+print(f"Peso total = {peso/10000} Toneladas") 
