@@ -40,24 +40,25 @@ ret_D_muerto.ensamblar_sistema()
 ret_D_muerto.resolver_sistema()
 ret_D_vivo_muerto.ensamblar_sistema()
 ret_D_vivo_muerto.resolver_sistema()
-# ret_D_5_barras.ensamblar_sistema()
-# ret_D_5_barras.resolver_sistema()
+
 
 f_D = ret_D.recuperar_fuerzas()
 f_D_muerto = ret_D_muerto.recuperar_fuerzas()
 f_D_vivo_muerto = ret_D_vivo_muerto.recuperar_fuerzas()
-# f_D_5_barras = ret_D_5_barras.recuperar_fuerzas()
+
 
 #Carga Viva
 ret_L.ensamblar_sistema()
 ret_L.resolver_sistema()
 f_L = ret_L.recuperar_fuerzas()
+
 #Combinaciones de carga
 f_1 = 1.4*f_D           #Combinacion 1
 f_2 = 1.2*f_D + 1.6*f_L #Combinacion 2
 f_3_D_muerto = 1.4*f_D_muerto
+f_3_DyL_muerto = 1.2*f_D_muerto + 1.6*f_L
 f_4_D_vivo_muerto = 1.2*f_D_vivo_muerto + 1.6*f_L
-# f_5_D_5_barras = 1.2*f_D_5_barras + 1.6*f_L
+
 
 # Calcular factores 
 FU_caso1 = ret_D.recuperar_factores_de_utilizacion(f_1)
@@ -217,12 +218,12 @@ barras_a_rediseñar = [i for i in range(386)]
 
 #                   CASO DE CARGA MUERTA OPTIMIZADA
 barras_muerto = ret_D_muerto.obtener_barras()
-# print(barras_muerto)
-barras_vivas=ret_L.obtener_barras()
+
+barras_vivas= ret_L.obtener_barras()
 
 for i in barras_a_rediseñar:
     barras_muerto[i].rediseñar(f_3_D_muerto[i],ret_D_muerto)
-    barras_vivas[i].rediseñar(f_3_D_muerto[i],ret_D_muerto)
+    barras_vivas[i].rediseñar(f_3_DyL_muerto[i],ret_D_muerto)
     # print(f'R:{ret_D_muerto}')
         
 
@@ -234,11 +235,13 @@ ret_L.resolver_sistema()
 
 f_L = ret_L.recuperar_fuerzas()
 
-FU_caso_muerto = ret_D_muerto.recuperar_factores_de_utilizacion(f_3_D_muerto)
+FU_caso_muerto = ret_D_muerto.recuperar_factores_de_utilizacion(f_3_DyL_muerto)
 f_D_muerto = ret_D_muerto.recuperar_fuerzas()
-f_3_D_muerto = 1.4*f_D_muerto 
 
-cumple_combinacion_1 = ret_D.chequear_diseño(f_3_D_muerto)
+f_3_D_muerto = 1.4*f_D_muerto 
+f_2 = 1.2*f_D_muerto + 1.6*f_L
+
+cumple_combinacion_1 = ret_D_muerto.chequear_diseño(f_3_D_muerto)
 cumple_combinacion_2 = ret_L.chequear_diseño(f_2)
 
 
@@ -302,7 +305,7 @@ plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D_muerto.u*1.4),3)
 plt.show()
 
 peso = ret_D_muerto.calcular_peso_total()
-print(f"peso optimizado 1.4 D = {peso}")
+print(f"peso optimizado 1.4 D = {peso/10000} Toneladas")
 
 ver_reticulado_3d(ret_D_muerto, 
     opciones_nodos = {
@@ -326,3 +329,4 @@ plt.suptitle("FU caso 3: 1.4 D OPTIMIZADO")
 plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D.u*1.4),3)} [mm]\n {condicion_1}")
 plt.show()
 print(f"cantidad de barras con error: {len(ret_D_muerto.lista_barras_error)}")
+print(f"cantidad de barras con error: {len(ret_L.lista_barras_error)}")

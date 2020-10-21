@@ -139,36 +139,36 @@ def caso_L():
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
-    props = [10*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    
     # Horizontales
     for k1 in range (nodos-1):
         if k1 == 34 or k1 == 35 or k1 == 0 or k1 == 1:
-            props = [10*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+            props = [9.5*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
             
         else:
-            props = [10*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+            props = [4.2*cm, 4*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
         ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
         
-    props = [10*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+   
     for k2 in range (nodos,2*nodos-1):
         if k2 == 37 or k2 == 38 or k2 == 71 or k2 == 72:
-            props = [15*cm, 10*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+            props = [13.5*cm, 8.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
         else:
-            props = [10*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+            props = [8*cm, 5.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
         ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
         
-    props = [10*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [5.5*cm, 4*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Verticales
-    for k4 in range (nodos-2):
+    for k4 in range (1, nodos-3):
         ret.agregar_barra(Barra(k4+1, k4+nodos+1, *props))
         
-    props = [5*cm, 5*cm, 200*GPa, 7600*kg/m**3, 420*MPa] 
+    props = [5*cm, 0.6*cm, 200*GPa, 7600*kg/m**3, 420*MPa] 
     # Diagonales
     for i in range (18):
         ret.agregar_barra(Barra(i, i+38, *props))
         ret.agregar_barra(Barra(i+55,i+19 , *props))
         
-    props = [r*2, t*4, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [17.5*cm, 8*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # arco1 parte en 75
     for i in range(16):
         if i ==0:
@@ -178,7 +178,7 @@ def caso_L():
         else:
             ret.agregar_barra(Barra((i-1)*2+75, i*2+75, *props))
     # arco2 parte en 74
-    props = [25*cm, 15*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [23.5*cm, 14.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     for i in range(17):
         if i ==0:
             # ret.agregar_barra(Barra(i+2, i+74, *props))
@@ -187,7 +187,7 @@ def caso_L():
             ret.agregar_barra(Barra(104, 105, *props))            
         else:
             ret.agregar_barra(Barra((i-1)*2+74, i*2+74, *props))    # # arco3
-    props = [20*cm, 8*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [18.5*cm, 5.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
         
     # arco3 
     for i in range(16):
@@ -197,10 +197,12 @@ def caso_L():
             ret.agregar_barra(Barra(120, 71, *props))
         else:
             ret.agregar_barra(Barra(i+106-1, i+106, *props))
+    props = [11.5*cm, 5.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Horizontales arco1 y arco3
     for i in range (15):
         ret.agregar_barra(Barra(i*2+75, i+106, *props))
     # diagonales tablero de arco
+    props = [11.5*cm, 5.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     for i in range(8):
         if i ==0:
             ret.agregar_barra(Barra(i+39, i+75, *props))
@@ -214,7 +216,7 @@ def caso_L():
         else:
             ret.agregar_barra(Barra(i*2+89, i+114, *props))
             
-    props = [20*cm, 12*cm, 200*GPa, 7600*kg/m**3, 420*MPa] 
+    props = [18.2*cm, 7.6*cm, 200*GPa, 7600*kg/m**3, 420*MPa] 
     # triangulo arco
     for i in range(17):
         if i ==0:
@@ -227,19 +229,19 @@ def caso_L():
             ret.agregar_barra(Barra(i*2+73, i*2+74, *props))
             ret.agregar_barra(Barra(i+105, i*2+74, *props))
 
-    props = [25*cm, 20*cm, 200*GPa, 7600*kg/m**3, 420*MPa]   
-     
-    ret.agregar_barra(Barra(0, 74, *props))            
+    props = [21.5*cm, 10*cm, 200*GPa, 7600*kg/m**3, 420*MPa]   
+    props1 = [21.5*cm, 11*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    ret.agregar_barra(Barra(0, 74, *props))          
     ret.agregar_barra(Barra(1, 74, *props))
-    ret.agregar_barra(Barra(37, 74, *props))
+    ret.agregar_barra(Barra(37, 74, *props1))
     ret.agregar_barra(Barra(38, 74, *props))
     
     ret.agregar_barra(Barra(35, 105, *props))            
     ret.agregar_barra(Barra(36, 105, *props))
     ret.agregar_barra(Barra(72, 105, *props))
-    ret.agregar_barra(Barra(73, 105, *props))
+    ret.agregar_barra(Barra(73, 105, *props1))
     
-    props = [20*cm, 8*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [17.9*cm, 8*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Diagonales arco
     for i in range(8):
         if i ==0:
@@ -261,8 +263,8 @@ def caso_L():
         else:
             ret.agregar_barra(Barra(i*2+89, i*2+92, *props))
             ret.agregar_barra(Barra(i+113, i*2+92, *props))
-    props = [18*cm, 180*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
-    props_m = [20*cm, 200*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props = [18*cm, 170*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    props_m = [17.9*cm, 170*mm, 200*GPa, 7600*kg/m**3, 420*MPa]
     # Cables lado 1
     for i in range (15):
         if i==0:

@@ -143,8 +143,8 @@ class Barra(object):
         """
         
         
-        lista_R=np.arange(0.01,self.R*2,0.005)
-        lista_t=np.arange(0.001,self.t*2,0.005)
+        lista_R=np.arange(0.01,self.R,0.001)
+        lista_t=np.arange(0.001,self.t,0.001)
         todas_las_combinaciones = list(itertools.product(lista_R, lista_t))
         
         lista_pasa_esbeltez=[]

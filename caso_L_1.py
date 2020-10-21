@@ -53,8 +53,8 @@ def caso_L():
     # for j in range (nodos-1):
     #     ret.agregar_nodo(12.5+j*5,0,100+sqrt(25-(2.5**2)))
         # ret.agregar_nodo(12.5+j*5,2,100+sqrt(25-(2.5**2)))
-    r = 20.0*cm
-    t = 40.0*mm 
+    r = 25.0*cm
+    t = 10*cm
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
