@@ -139,6 +139,7 @@ def caso_D():
     """
     REVISAR EN PROPS R,R DEBERIA SER R,T
     """
+<<<<<<< HEAD
     
     # Horizontales
     for k1 in range (nodos-1):
@@ -158,6 +159,14 @@ def caso_D():
         ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
         
     props = [5.5*cm, 4*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+=======
+    props = [0.05, 3*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+    # Horizontales
+    for k1 in range (nodos-1):
+        ret.agregar_barra(Barra(k1, k1+1, *props))      # 1
+    for k2 in range (nodos,2*nodos-1):
+        ret.agregar_barra(Barra(k2, k2+1, *props))      # 1
+>>>>>>> parent of 4bbed02... AL FIN CTM CUMPLE CONDICIONES
     # Verticales
     for k4 in range (1, nodos-3):
         ret.agregar_barra(Barra(k4+1, k4+nodos+1, *props))
@@ -178,7 +187,11 @@ def caso_D():
         else:
             ret.agregar_barra(Barra((i-1)*2+75, i*2+75, *props))
     # arco2 parte en 74
+<<<<<<< HEAD
     props = [23.5*cm, 14.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+=======
+    props = [r*2, t*6, 200*GPa, 7600*kg/m**3, 420*MPa]
+>>>>>>> parent of 4bbed02... AL FIN CTM CUMPLE CONDICIONES
     for i in range(17):
         if i ==0:
             # ret.agregar_barra(Barra(i+2, i+74, *props))
@@ -187,7 +200,11 @@ def caso_D():
             ret.agregar_barra(Barra(104, 105, *props))            
         else:
             ret.agregar_barra(Barra((i-1)*2+74, i*2+74, *props))    # # arco3
+<<<<<<< HEAD
     props = [18.5*cm, 5.5*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+=======
+    props = [r*2, t*4, 200*GPa, 7600*kg/m**3, 420*MPa]
+>>>>>>> parent of 4bbed02... AL FIN CTM CUMPLE CONDICIONES
     # arco3 parte en 107
     for i in range(16):
         if i ==0:
@@ -214,8 +231,11 @@ def caso_D():
             ret.agregar_barra(Barra(103, 71, *props))
         else:
             ret.agregar_barra(Barra(i*2+89, i+114, *props))
+<<<<<<< HEAD
             
     props = [18.2*cm, 7.6*cm, 200*GPa, 7600*kg/m**3, 420*MPa]        
+=======
+>>>>>>> parent of 4bbed02... AL FIN CTM CUMPLE CONDICIONES
     # triangulo arco
     for i in range(17):
         if i ==0:
@@ -227,10 +247,14 @@ def caso_D():
         else:
             ret.agregar_barra(Barra(i*2+73, i*2+74, *props))
             ret.agregar_barra(Barra(i+105, i*2+74, *props))
+<<<<<<< HEAD
             
     props = [21.5*cm, 10*cm, 200*GPa, 7600*kg/m**3, 420*MPa]   
     props1 = [21.5*cm, 11*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
     ret.agregar_barra(Barra(0, 74, *props))          
+=======
+    ret.agregar_barra(Barra(0, 74, *props))            
+>>>>>>> parent of 4bbed02... AL FIN CTM CUMPLE CONDICIONES
     ret.agregar_barra(Barra(1, 74, *props))
     ret.agregar_barra(Barra(37, 74, *props1))
     ret.agregar_barra(Barra(38, 74, *props))
@@ -238,9 +262,13 @@ def caso_D():
     ret.agregar_barra(Barra(35, 105, *props))            
     ret.agregar_barra(Barra(36, 105, *props))
     ret.agregar_barra(Barra(72, 105, *props))
+<<<<<<< HEAD
     ret.agregar_barra(Barra(73, 105, *props1))
     
     props = [17.9*cm, 8*cm, 200*GPa, 7600*kg/m**3, 420*MPa]
+=======
+    ret.agregar_barra(Barra(73, 105, *props))
+>>>>>>> parent of 4bbed02... AL FIN CTM CUMPLE CONDICIONES
     # Diagonales arco
     for i in range(8):
         if i ==0:
@@ -304,5 +332,36 @@ def caso_D():
     ret.agregar_restriccion(73, 1, 0)
     ret.agregar_restriccion(73, 2, 0) 
     
-
+    # #nodos opcionales
+    # ret.agregar_restriccion(2, 0, 0)
+    # ret.agregar_restriccion(2, 1, 0)
+    # ret.agregar_restriccion(2, 2, 0)
+    
+    # ret.agregar_restriccion(39, 0, 0)
+    # ret.agregar_restriccion(39, 1, 0)
+    # ret.agregar_restriccion(39, 2, 0)
+    
+    # ret.agregar_restriccion(34, 0, 0)
+    # ret.agregar_restriccion(34, 1, 0)
+    # ret.agregar_restriccion(34, 2, 0)
+    
+    # ret.agregar_restriccion(71, 0, 0)
+    # ret.agregar_restriccion(71, 1, 0)
+    # ret.agregar_restriccion(71, 2, 0)
+    
+    # ret.agregar_restriccion(1, 0, 0)
+    # ret.agregar_restriccion(1, 1, 0)
+    # ret.agregar_restriccion(1, 2, 0)
+    
+    # ret.agregar_restriccion(38, 0, 0)
+    # ret.agregar_restriccion(38, 1, 0)
+    # ret.agregar_restriccion(38, 2, 0)
+    
+    # ret.agregar_restriccion(35, 0, 0)
+    # ret.agregar_restriccion(35, 1, 0)
+    # ret.agregar_restriccion(35, 2, 0)
+    
+    # ret.agregar_restriccion(72, 0, 0)
+    # ret.agregar_restriccion(72, 1, 0)
+    # ret.agregar_restriccion(72, 2, 0)
     return ret

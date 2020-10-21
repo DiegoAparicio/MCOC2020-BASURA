@@ -20,7 +20,7 @@ ret_D_muerto = caso_D()
 ret_D_vivo_muerto = caso_D()
 ret_D_5_barras = caso_D()
 factor_a=30.0
-numero_de_grafica=7
+numero_de_grafica=9
 ver_reticulado_3d(ret_D, 
 	axis_Equal=True, 
 	opciones_barras={
@@ -118,7 +118,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": False,
+        "ver_dato_en_barras": True,
         "dato": f_1,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -144,7 +144,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": False,
+        "ver_dato_en_barras": True,
         "dato": f_2,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -169,7 +169,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": False,
+        "ver_dato_en_barras": True,
         "dato": FU_caso1,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -193,7 +193,7 @@ ver_reticulado_3d(ret_D,
     opciones_barras = {
         "color_barras_por_dato": True,
         "ver_numeros_de_barras": False,
-        "ver_dato_en_barras": False,
+        "ver_dato_en_barras": True,
         "dato": FU_caso2,
         "color_fondo": [1,1,1,0.4]
     }, 
@@ -211,7 +211,7 @@ peso = ret_D.calcular_peso_total()
 
 print(f"peso original = {peso}")
 print(f"cantidad de barras con error: {len(ret_D.lista_barras_error)}")
-
+"""
 barras_a_rediseñar = [i for i in range(386)]
 
 
@@ -263,7 +263,7 @@ if cumple_combinacion_1 and cumple_combinacion_2:
     print(f"Peso total = {peso_D}") 
 
 """
-AÑADIDO NUEVO
+
 """
 # #cumple_combinacion_1 = ret_D.chequear_diseño(f_1)
 # #cumple_combinacion_2 = ret_L.chequear_diseño(f_2)
@@ -315,7 +315,7 @@ ver_reticulado_3d(ret_D_muerto,
     },
     opciones_barras = {
         "color_barras_por_dato": True,
-        "ver_numeros_de_barras": False,
+        "ver_numeros_de_barras": True,
         "ver_dato_en_barras": True,
         "dato": FU_caso_muerto,
         "color_fondo": [1,1,1,0.4]
@@ -330,3 +330,4 @@ plt.title(f"El desplazamiento máximo es: {round(1000*min(ret_D.u*1.4),3)} [mm]\
 plt.show()
 print(f"cantidad de barras con error: {len(ret_D_muerto.lista_barras_error)}")
 print(f"cantidad de barras con error: {len(ret_L.lista_barras_error)}")
+"""
